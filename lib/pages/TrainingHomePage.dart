@@ -274,22 +274,108 @@ class _MyTrainingHomePageState extends State<MyTrainingHomePage> with SingleTick
 
   List<Bai> baiList =  List();
 
+  YoutubePlayerController makeController(String url){
+    String videoId = YoutubePlayer.convertUrlToId(url);
+    return YoutubePlayerController(
+      initialVideoId: videoId,
+      flags: YoutubePlayerFlags(
+          mute: false,
+          autoPlay: false,
+          forceHideAnnotation: false,
+          enableCaption: false
+      ),
+    );
+  }
+
+  Widget wapiYtPlayer(String url, String titre, String resume){
+    return Column(
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+            Expanded(
+
+              child: YoutubePlayer(
+                  controller: makeController(url),
+                  showVideoProgressIndicator: true,
+                  progressIndicatorColor: Colors.amber,
+                  progressColors: ProgressBarColors(
+                      playedColor: Colors.amber,
+                      handleColor: Colors.amber
+                  ),
+                  onReady:(){
+                    print('player is ready');
+                  }
+              ),
+            ),
+          ],
+        ),
+        Padding(
+
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 4.0),
+                      child: Text(
+                        titre,
+                        style: TextStyle(fontSize: 14.0),
+                      ),
+                    ),
+                    Text(
+                      resume,
+                      style: TextStyle(color: Colors.black54),
+                    )
+                  ],
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                ),
+                flex: 9,
+              ),
+              Expanded(
+                child: Icon(Icons.more_vert),
+                flex: 1,
+              ),
+            ],
+          ),
+
+        ),
+        Container(
+          decoration: BoxDecoration(
+
+            border: Border(
+              bottom: BorderSide(
+                color: Colors.black54,
+                width: 3.0,
+              ),
+            ),
+          ),
+        ),
+
+      ],
+    );
+  }
+
   @override
   void initState(){
     Timer(Duration(seconds: 2), () {
       print("Yeah, this line is printed after 3 seconds");
     });
 
-//    String videoId = YoutubePlayer.convertUrlToId("https://www.youtube.com/watch?v=VHoT4N43jK8&list=RDUKftOH54iNU&index=16");
-//    _controller = YoutubePlayerController(
-//      initialVideoId: videoId,
-//      flags: YoutubePlayerFlags(
-//        mute: false,
-//        autoPlay: false,
-//        forceHideAnnotation: true,
-//        enableCaption: false
-    //      ),
-    //    );'assets/pdfs/'+widget.title+'.pdf'
+    String videoId = YoutubePlayer.convertUrlToId("https://www.youtube.com/watch?v=VHoT4N43jK8&list=RDUKftOH54iNU&index=16");
+    _controller = YoutubePlayerController(
+      initialVideoId: videoId,
+      flags: YoutubePlayerFlags(
+        mute: false,
+        autoPlay: false,
+        forceHideAnnotation: false,
+        enableCaption: true
+          ),
+        );
+
 
     _tabController = new TabController(length: 2, vsync: this);
     baiList
@@ -1293,20 +1379,19 @@ class _MyTrainingHomePageState extends State<MyTrainingHomePage> with SingleTick
           ),*/
 
 
-          new Container(
-            child: YoutubePlayer(
+          new ListView(
 
-                controller: _controller,
-                showVideoProgressIndicator: true,
-                progressIndicatorColor: Colors.amber,
-                progressColors: ProgressBarColors(
-                    playedColor: Colors.amber,
-                    handleColor: Colors.amber
-                ),
-                onReady:(){
-                  print('player is ready');
-                }
-            ),
+            children:<Widget>[
+              Container(
+                child: wapiYtPlayer('https://www.youtube.com/watch?v=qS01oRF1U1k', 'Engrais Organiques', 'Vous apprendrez comment produire des engrais organiques')
+              ),
+              Container(
+                child: wapiYtPlayer('https://www.youtube.com/watch?v=KZDJmFSTnVw', 'Plantules de Baobab', 'Vous apprendrez comment faire et suivre les plantules de Baobab'),
+              ),
+              Container(
+                child: wapiYtPlayer(('https://www.youtube.com/watch?v=KTKnE2aY4qI'), 'Mung Bean', 'Préparation à bas de Mung Bean')
+              ),
+         ]
 
           ),
         ],
