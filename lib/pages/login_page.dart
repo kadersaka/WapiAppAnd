@@ -130,14 +130,6 @@ class LoginPageState extends State<LoginPage> {
                     ignoreBlank: true,
                     onInputValidated: (bool value) {
                       print(value);
-                      // getPhoneNumber(PhoneNumber number)
-                      //phoneNUm = int.parse(number.ph)
-/*
-                        setState(() {
-                         // mynum = PhoneNumber number;
-                        phoneNum = int.parse(number.phoneNumber);
-                      });
-*/
 
                     },
                   ),

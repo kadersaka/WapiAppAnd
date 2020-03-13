@@ -46,9 +46,7 @@ class DatabaseHelper{
 
 
   checkUser(String phone) async{
-
     print('phone : $phone');
-
     String myUrl = "$serverUrl/checkuser";
     final response = await  http.post(myUrl,
         headers: {
@@ -59,17 +57,14 @@ class DatabaseHelper{
         } ) ;
     print(response.body);
     status = response.body.contains('error');
-
     var data = json.decode(response.body);
     rData = json.decode(response.body);
-
     if(status){
       print('datahelper.checkuser data error: ${data["error"]}');
     }else{
       print('datahelper.checkuser data success: $data');
       //_save(data["token"], data["name"], data["email"], data["phone"]);
     }
-
   }
 
 

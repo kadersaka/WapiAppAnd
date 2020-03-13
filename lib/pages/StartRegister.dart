@@ -232,9 +232,13 @@ class StartRegisterState extends State<StartRegister> {
 //              globalKey.currentState.showSnackBar(new SnackBar(
 //                content: new Text(SnackBarText.LOGIN_SUCCESSFUL),
 //              ));
-            print('user account checked successfully');
+            print('user account checked successfully rData 2: ');
+
             progressDialog.hideProgress();
+            print(databaseHelper.rData["code"]);
             user['phone'] = phoneNum.trim();
+            user['code'] = databaseHelper.rData["code"];
+            print('code is '+user['code']);
             print(user);
             _goToVerifyScreen();
           });

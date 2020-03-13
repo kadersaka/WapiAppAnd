@@ -54,7 +54,8 @@ dependencies:
   #flutter_fab_dialer: ^0.1.1
   #speed_dial: ^0.0.1
   unicorndial: ^1.1.5
-
+  fancy_dialog: ^1.0.3
+  #flutter_youtube_view: ^1.1.7
 
 
 

@@ -4,9 +4,10 @@ class Bai{
   String baiTitle;
   String baiImage;
   String baiPdf;
+  String baiName;
 
 
-  Bai({this.id, this.baiCat, this.baiTitle, this.baiImage,this.baiPdf});
+  Bai({this.id, this.baiCat, this.baiTitle, this.baiImage,this.baiPdf, this.baiName});
 
 
 }

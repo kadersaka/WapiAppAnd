@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:wap_i/pages/StartRegister.dart';
 import 'package:wap_i/pages/TrainingHomePage.dart';
 import 'package:wap_i/pages/login_page.dart';
@@ -90,6 +91,8 @@ class VerifyPhoneState extends State<VerifyPhone> {
 //------------------------------------------------------------------------------
                   _registerButtonContainer(),
 //------------------------------------------------------------------------------
+                  _resendButtonContainer(),
+//------------------------------------------------------------------------------
                 ],
               ))),
       margin: EdgeInsets.only(top: 20.0, left: 25.0, right: 25.0),
@@ -127,6 +130,23 @@ class VerifyPhoneState extends State<VerifyPhone> {
           ),
         ),
         margin: EdgeInsets.only(bottom: 30.0));
+  }
+
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+  Widget _resendButtonContainer() {
+    return new Container(
+        width: double.infinity,
+        decoration: new BoxDecoration(color: Colors.red[600]),
+        child: new MaterialButton(
+          textColor: Colors.white,
+          padding: EdgeInsets.all(15.0),
+          onPressed: _resendCode,
+          child: new Text('RENVOYER LE CODE',
+            style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0, color: Colors.white),
+          ),
+        ),
+        margin: EdgeInsets.only(top: 60.0));
   }
 
 //------------------------------------------------------------------------------
@@ -341,4 +361,16 @@ class VerifyPhoneState extends State<VerifyPhone> {
 
 
 
+
+  void _resendCode() {
+    Fluttertoast.showToast(
+        msg: 'Votre code est: '+widget.user['code'],
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIos: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+  }
 }
